@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice 4.1.15  (Win32)">
+	<META NAME="CREATED" CONTENT="20090416;11320264">
+	<META NAME="CHANGEDBY" CONTENT="jk jk">
+	<META NAME="CHANGED" CONTENT="20241117;9062446">
+	<META NAME="Info 1" CONTENT="">
+	<META NAME="Info 2" CONTENT="">
+	<META NAME="Info 3" CONTENT="">
+	<META NAME="Info 4" CONTENT="">
+	<META NAME="CHANGEDBY" CONTENT="jk jk">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { margin: 2cm }
+		P { margin-bottom: 0.21cm }
+		P.western { font-family: "Arial", sans-serif; so-language: zxx }
+		P.cjk { so-language: zxx }
+		P.ctl { so-language: zxx }
+		TD P { margin-bottom: 0.21cm }
+		TD P.western { font-family: "Arial", sans-serif; so-language: zxx }
+		TD P.cjk { so-language: zxx }
+		TD P.ctl { so-language: zxx }
+		H1 { margin-bottom: 0.21cm }
+		H1.western { font-family: "Arial", sans-serif; font-size: 16pt; so-language: zxx }
+		H1.cjk { font-family: "Andale Sans UI"; font-size: 16pt; so-language: zxx }
+		H1.ctl { font-family: "Tahoma"; font-size: 16pt; so-language: zxx }
+		P.code-western { background: #dddddd; font-family: "Bahnschrift", sans-serif; so-language: zxx; text-align: left }
+		P.code-cjk { background: #dddddd; so-language: zxx; text-align: left }
+		P.code-ctl { background: #dddddd; so-language: zxx; text-align: left }
+		A:link { so-language: zxx }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="de-DE" DIR="LTR">
+<H1 LANG="zxx" CLASS="western" ALIGN=CENTER>Entwicklungstagebuch</H1>
+<P LANG="zxx" CLASS="western" ALIGN=CENTER><BR><BR>
+</P>
+<H1 LANG="zxx" CLASS="western">Projekt anlegen</H1>
+<UL>
+	<LI><P LANG="zxx" CLASS="western" ALIGN=LEFT><FONT FACE="Arial, sans-serif">in
+	Kommandozeile im Arbeitsverzeichnis</FONT></P>
+	<P LANG="zxx" CLASS="code-western"><SPAN STYLE="font-style: normal"><SPAN STYLE="font-weight: normal">npx
+	sv create my-app</SPAN></SPAN> 
+	</P>
+</UL>
+<P LANG="zxx" CLASS="western"><BR><BR>
+</P>
+<UL>
+	<LI><P LANG="zxx" CLASS="western" STYLE="font-style: normal; font-weight: normal">
+	Frage ob sv installiert werden soll bejahen</P>
+	<LI><P LANG="zxx" CLASS="western" STYLE="font-style: normal; font-weight: normal">
+	Option Svelte -demo installieren (alternativ svelte-package wenn man
+	ein lib bauen will?)</P>
+	<LI><P LANG="zxx" CLASS="western" STYLE="font-style: normal; font-weight: normal">
+	Option Typechecking &uuml;ber JSDOcs</P>
+	<LI><P LANG="zxx" CLASS="western" STYLE="font-style: normal; font-weight: normal">
+	libs anw&auml;hlen (welche brauchen wir wirklich?)</P>
+</UL>
+<P LANG="zxx" CLASS="western" STYLE="font-style: normal; font-weight: normal">
+| [+] prettier (codeformatter)</P>
+<P LANG="zxx" CLASS="western" STYLE="font-style: normal; font-weight: normal">
+| [+] eslint (findet probleme im js beim Editieren)</P>
+<P LANG="zxx" CLASS="western" STYLE="font-style: normal; font-weight: normal">
+| [-] vitest (testframework)</P>
+<P LANG="zxx" CLASS="western" STYLE="font-style: normal; font-weight: normal">
+| [+] playwright (testframework)</P>
+<P LANG="zxx" CLASS="western" STYLE="font-style: normal; font-weight: normal">
+| [-] tailwindcss (irgendwas mit css)</P>
+<P LANG="zxx" CLASS="western" STYLE="font-style: normal; font-weight: normal">
+| [+] drizzle (database)</P>
+<P LANG="zxx" CLASS="western" STYLE="font-style: normal; font-weight: normal">
+| [+] lucia (Auth)</P>
+<P LANG="zxx" CLASS="western" STYLE="font-style: normal; font-weight: normal">
+| [+] mdsvex (markdown)</P>
+<P LANG="zxx" CLASS="western" STYLE="font-style: normal; font-weight: normal">
+| [-] paraglide (f&uuml;r i18)</P>
+<P LANG="zxx" CLASS="western"><SPAN LANG="zxx"><SPAN STYLE="font-style: normal"><SPAN STYLE="font-weight: normal">|
+[-] storybook (<A HREF="https://storybook.js.org/">https://storybook.js.org</A>)
+</SPAN></SPAN></SPAN>
+</P>
+<P LANG="zxx" CLASS="western"><BR><BR>
+</P>
+<UL>
+	<LI><P LANG="zxx" CLASS="western" STYLE="font-style: normal; font-weight: normal">
+	libs konfigurieren (welche brauchen wir wirklich?)</P>
+</UL>
+<P LANG="zxx" CLASS="western" STYLE="font-style: normal; font-weight: normal">
+tailwind alle plugins</P>
+<P LANG="zxx" CLASS="western" STYLE="font-style: normal; font-weight: normal">
+drizzle &ndash; SQLite &amp; better-SQLite</P>
+<UL>
+	<LI><P LANG="zxx" CLASS="western">packagemanager einstellen: npm</P>
+</UL>
+<P LANG="zxx" CLASS="western"><BR><BR>
+</P>
+<UL>
+	<LI><P LANG="zxx" CLASS="western">dann</P>
+</UL>
+<UL>
+	<P LANG="zxx" CLASS="code-western">cd my-app 
+	</P>
+	<P LANG="zxx" CLASS="code-western">npm install 
+	</P>
+</UL>
+<P LANG="zxx" CLASS="western"><BR><BR>
+</P>
+<UL>
+	<LI><P LANG="zxx" CLASS="western">dann</P>
+	<P LANG="zxx" CLASS="code-western" STYLE="font-style: normal; font-weight: normal">
+	<FONT COLOR="#000000"><FONT FACE="Arial, sans-serif"><FONT SIZE=2 STYLE="font-size: 11pt">npm
+	run dev -- --open</FONT></FONT></FONT></P>
+	<P LANG="zxx" CLASS="western"><SPAN LANG="zxx">und browse zu
+	<A HREF="http://localhost:5173/">http://localhost:5173</A></SPAN></P>
+</UL>
+<P LANG="zxx" CLASS="western"><BR><BR>
+</P>
+<P LANG="zxx" CLASS="western"><BR><BR>
+</P>
+<H1 LANG="zxx" CLASS="western">GameView erstellen</H1>
+<P LANG="zxx" CLASS="western"><BR><BR>
+</P>
+<DL>
+	<DL>
+		<DL>
+			<DL>
+				<DD>
+				<TABLE WIDTH=210 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
+					<COL WIDTH=61>
+					<COL WIDTH=62>
+					<COL WIDTH=61>
+					<TR VALIGN=TOP>
+						<TD WIDTH=61>
+							<P LANG="zxx" CLASS="western" ALIGN=CENTER><FONT SIZE=4 STYLE="font-size: 16pt">X</FONT></P>
+						</TD>
+						<TD WIDTH=62>
+							<P LANG="zxx" CLASS="western" ALIGN=CENTER><FONT SIZE=4 STYLE="font-size: 16pt">O</FONT></P>
+						</TD>
+						<TD WIDTH=61>
+							<P LANG="zxx" CLASS="western" ALIGN=CENTER><BR>
+							</P>
+						</TD>
+					</TR>
+					<TR VALIGN=TOP>
+						<TD WIDTH=61>
+							<P LANG="zxx" CLASS="western" ALIGN=CENTER><BR>
+							</P>
+						</TD>
+						<TD WIDTH=62>
+							<P LANG="zxx" CLASS="western" ALIGN=CENTER><FONT SIZE=4 STYLE="font-size: 16pt">X</FONT></P>
+						</TD>
+						<TD WIDTH=61>
+							<P LANG="zxx" CLASS="western" ALIGN=CENTER><BR>
+							</P>
+						</TD>
+					</TR>
+					<TR VALIGN=TOP>
+						<TD WIDTH=61>
+							<P LANG="zxx" CLASS="western" ALIGN=CENTER><BR>
+							</P>
+						</TD>
+						<TD WIDTH=62>
+							<P LANG="zxx" CLASS="western" ALIGN=CENTER><FONT SIZE=4 STYLE="font-size: 16pt">O</FONT></P>
+						</TD>
+						<TD WIDTH=61>
+							<P LANG="zxx" CLASS="western" ALIGN=CENTER><BR>
+							</P>
+						</TD>
+					</TR>
+				</TABLE>
+			</DL>
+		</DL>
+	</DL>
+</DL>
+<P LANG="zxx" CLASS="western"><BR><BR>
+</P>
+</BODY>
+</HTML>

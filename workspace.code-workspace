@@ -1,0 +1,34 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {},
+	"launch": {
+		"configurations": [
+			{
+				"type": "pwa-msedge",
+				"name": "http://192.168.2.101:5173/",
+				"request": "launch",
+				"url": "http://192.168.2.101:5173/"
+			},
+			{
+				"type": "pwa-msedge",
+				"name": "http://localhost:5173/",
+				"request": "launch",
+				"url": "http://[::1]:5173/"
+			},
+			{
+				"name": "Attach",
+				"port": 9229,
+				"request": "attach",
+				"skipFiles": [
+					"<node_internals>/**"
+				],
+				"type": "pwa-node"
+			}
+
+		]
+	}
+}
