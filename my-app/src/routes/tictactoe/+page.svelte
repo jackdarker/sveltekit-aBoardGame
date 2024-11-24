@@ -2,9 +2,44 @@
 	import type { PageData } from './$types';
     import { goto } from '$app/navigation';
     import { Button, Tag,Form, TextInput, Search, Select, SelectItem } from "carbon-components-svelte";
+    import { onMount } from 'svelte';
 
     import { source } from 'sveltekit-sse'
     const value = source('/custom-event').select('message')
+
+    let webSocketEstablished = false;
+    let ws  = null;
+    let log = $state([]);
+  
+    const logEvent = (str) => {
+      log = [...log, str];
+    };
+  
+    const establishWebSocket = () => {
+      if (webSocketEstablished) return;
+      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+      ws = new WebSocket(`${protocol}//${window.location.host}/websocket`);
+      ws.addEventListener('open', event => {
+        webSocketEstablished = true;
+        console.log('[websocket] connection open', event);
+        logEvent('[websocket] connection open');
+      });
+      ws.addEventListener('close', event => {
+        console.log('[websocket] connection closed', event);
+        logEvent('[websocket] connection closed');
+      });
+      ws.addEventListener('message', event => {
+        console.log('[websocket] message received', event);
+        logEvent(`[websocket] message received: ${event.data}`);
+      });
+    };
+  
+    const requestData = async () => {
+      const res = await fetch('/api/test');
+      const data = await res.json();
+      console.log('Data from GET endpoint', data);
+      logEvent(`[GET] data received: ${JSON.stringify(data)}`);
+    };
 
 	let { data }: { data: PageData } = $props();
     let img=["O.png","_.png","X.png"];
@@ -42,6 +77,9 @@
             e.preventDefault();
         }
     }
+    onMount(()=>{
+        establishWebSocket();
+    });
     function afterReload(_data){    //refresh local data with loaded data
     }
    //$:afterReload(data);
@@ -51,6 +89,13 @@
 </svelte:head>
 
 <section><div>{data.tiles}{$value}</div>
+    <div>
+        <ul>
+            {#each log as event}
+              <li>{event}</li>
+            {/each}
+          </ul>
+        </div>
 <div class="text-column">
     <table style="table-layout:fixed" width="240em">
         <colgroup>

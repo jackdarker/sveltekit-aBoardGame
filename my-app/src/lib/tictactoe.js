@@ -1,5 +1,6 @@
 
-const db2 = new Map();
+
+
 let tiles=[0,0,0,0,0,0,0,0,0];
 let players=[];
 let currentPlayer;

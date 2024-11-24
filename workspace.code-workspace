@@ -20,7 +20,7 @@
 				"url": "http://[::1]:5173/"
 			},
 			{
-				"name": "Attach",
+				"name": "Attach to started Node",
 				"port": 9229,
 				"request": "attach",
 				"skipFiles": [

@@ -9,8 +9,8 @@
 	import Counter from './Counter.svelte';
 	import welcome from '$lib/images/svelte-welcome.webp';
 	import welcomeFallback from '$lib/images/svelte-welcome.png';
-	import { source } from 'sveltekit-sse'
-  const value = source('/custom-event').select('message')
+	//import { source } from 'sveltekit-sse'
+  //const value = source('/custom-event').select('message')			 {$value}
 </script>
 
 <svelte:head>
@@ -27,7 +27,7 @@
 			</picture>
 		</span>
 
-		to your new<br />SvelteKit app<br>{$value}
+		to your new<br />SvelteKit app<br>
 	</h1>
 	<Counter />
 	<h2>

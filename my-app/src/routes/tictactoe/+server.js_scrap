@@ -1,0 +1,87 @@
+//see https://github.com/razshare/sveltekit-sse/
+
+import { produce } from 'sveltekit-sse';
+
+function eventStopper(route_id, emit, lock) {
+    /** @type {(() => void)[]} */
+    const stopFunctions = []
+  
+    return {
+      /**
+       * Appends a callback to run when the stopper is stopped.
+       * @param {() => void} func
+       */
+      push(func) {
+        stopFunctions.push(func)
+      },
+  
+      /**
+       * Calls all functions in the stopper. Expected usage is that this will be\
+       * returned at the end of the `start` scope of the `events` function,
+       * instead of being called directly.
+       */
+      onStop() {
+        for (const fn of stopFunctions) {
+          try {
+            console.debug('Stopping SSE @', route_id)
+            fn()
+          } catch (err) {
+            console.error('Error stopping SSE @', route_id, err)
+          }
+        }
+      },
+  
+      /**
+       * Emits a `stop` event to the client, then locks the connection. If a
+       * message is provided, it will be pushed to the client as an error message.
+       */
+      stop(message = '') {
+        // Include timestamp with message to ensure Svelte reactivity
+        const { error } = emit('stop', `${new Date().getTime()}: ${message}`)
+        if (error && error.message !== 'Client disconnected from the stream.') {
+          console.error('Error stopping SSE @', route_id, error)
+        }
+        lock.set(false)
+  
+        return this.onStop
+      },
+    }
+  }
+
+export async function POST({ route, request }) {
+    /** @type {string} */
+    let id
+  
+    if (request.body) {
+      id = (await request.json()).id
+    }
+  
+    return produce(function start({ emit, lock }) {
+      const stopper = eventStopper(route.id, emit, lock)
+  
+      const unsubRoom = room.subscribe(function notify(value) {
+        const { error } = emit('usersInRoom', JSON.stringify(value))
+        if (error) {
+          console.error(error)
+          lock.set(false)
+        }
+      })
+      stopper.push(unsubRoom)
+  
+      /*const unsubLobby = lobbyView.subscribe(function notify(value) {
+        const { error } = emit('usersInLobby', JSON.stringify(value))
+        if (error) {
+          console.error(error)
+          lock.set(false)
+        }
+      })
+      stopper.push(unsubLobby)
+  
+      updateStore(room, { id })
+      stopper.push(function leaveRoom() {
+        removeFromStore(room, id)
+      })*/
+  
+      return stopper.onStop
+    })
+  }
