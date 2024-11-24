@@ -1,6 +1,8 @@
 
 
 
+import { getUsersByRoom } from '$lib/server/users';
+
 let tiles=[0,0,0,0,0,0,0,0,0];
 let players=[];
 let currentPlayer;
@@ -28,7 +30,8 @@ export function setState(idx,playerid) {
 		setTimeout(() => {
 			let choose;
 			tiles.forEach((x,i)=>{if(x==0) choose=i;});
-			setState(choose,null)
+			setState(choose,null);
+			getUsersByRoom("lobby").forEach(x=>{x.ws.send("update");}) //trigger update of page
 		}, 2000);
 	}
 }

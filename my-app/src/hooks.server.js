@@ -1,6 +1,8 @@
 import * as auth from '$lib/server/auth.js';
 import { building } from '$app/environment';
 import { GlobalThisWSS } from '$lib/server/webSocketUtils';
+import { userJoin,userLeave } from '$lib/server/users';
+
 // This can be extracted into a separate file
 let wssInitialized = false;
 const startupWebsocketServer = () => {
@@ -10,13 +12,18 @@ const startupWebsocketServer = () => {
   if (wss !== undefined) {
     wss.on('connection', (ws, _request) => {
       // This is where you can authenticate the client from the request
-      // const session = await getSessionFromCookie(request.headers.cookie || '');
-      // if (!session) ws.close(1008, 'User not authenticated');
-      // ws.userId = session.userId;
+      const session = _request.headers.cookie; //userid=... //getSessionFromCookie(request.headers.cookie || '');
+      const protocoll = ws.protocol; //"lobby"
+      if (!session) ws.close(1008, 'User not authenticated');
       console.log(`[wss:kit] client connected (${ws.socketId})`);
-	  function foo(){ws.send(`Hello from SvelteKit ${new Date().toLocaleString()} (${ws.socketId})]`);}
-	  setInterval(foo, 1000)
+      let clients=wss.clients;
+      userJoin(ws,session,"lobby");
+	  //function foo(){
+    //  ws.send(`Hello_ from SvelteKit ${new Date().toLocaleString()} (${ws.socketId})]`);
+    //}
+	  //setInterval(foo, 1000)
       ws.on('close', () => {
+        userLeave(ws);
         console.log(`[wss:kit] client disconnected (${ws.socketId})`);
       });
     });

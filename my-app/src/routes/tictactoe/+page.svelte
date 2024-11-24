@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-    import { goto } from '$app/navigation';
+    import { goto,invalidateAll } from '$app/navigation';
     import { Button, Tag,Form, TextInput, Search, Select, SelectItem } from "carbon-components-svelte";
     import { onMount } from 'svelte';
 
@@ -12,13 +12,13 @@
     let log = $state([]);
   
     const logEvent = (str) => {
-      log = [...log, str];
+      log = [...log, str].slice(-5);
     };
   
     const establishWebSocket = () => {
       if (webSocketEstablished) return;
       const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-      ws = new WebSocket(`${protocol}//${window.location.host}/websocket`);
+      ws = new WebSocket(`${protocol}//${window.location.host}/websocket`,'lobby');
       ws.addEventListener('open', event => {
         webSocketEstablished = true;
         console.log('[websocket] connection open', event);
@@ -31,6 +31,8 @@
       ws.addEventListener('message', event => {
         console.log('[websocket] message received', event);
         logEvent(`[websocket] message received: ${event.data}`);
+        //goto(location.href, { replaceState:true,invalidateAll:true }) //does also work?
+        invalidateAll();    //TODO invalidate((URL)=>{URL==="/path"});
       });
     };
   
@@ -65,8 +67,8 @@
             if (status != 200){
                 alert(response.error.message);
             } else {
-                //goto(location.href, { replaceState:true,invalidateAll:true })
-                location.reload(); //this causes page to flicker because full reload
+                goto(location.href, { replaceState:true,invalidateAll:true })
+                //location.reload(); //this causes page to flicker because full reload
             }
         }
     }

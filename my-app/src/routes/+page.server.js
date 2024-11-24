@@ -6,8 +6,8 @@ export function load({ fetch,params,setHeaders,cookies,url }) {
 	if (!id) {
 		cookies.set('userid', crypto.randomUUID(), { path: '/' });
 	}
-	let search = url.searchParams;
-	let item= decodeURIComponent(search.get('item')||"");
+	//let search = url.searchParams;
+	//let item= decodeURIComponent(search.get('item')||"");
     return({todos:[]});
 }
 
