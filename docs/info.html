@@ -6,11 +6,12 @@
 	<META NAME="GENERATOR" CONTENT="OpenOffice 4.1.15  (Win32)">
 	<META NAME="CREATED" CONTENT="20090416;11320264">
 	<META NAME="CHANGEDBY" CONTENT="jk jk">
-	<META NAME="CHANGED" CONTENT="20241123;17522238">
+	<META NAME="CHANGED" CONTENT="20241201;17344351">
 	<META NAME="Info 1" CONTENT="">
 	<META NAME="Info 2" CONTENT="">
 	<META NAME="Info 3" CONTENT="">
 	<META NAME="Info 4" CONTENT="">
+	<META NAME="CHANGEDBY" CONTENT="jk jk">
 	<META NAME="CHANGEDBY" CONTENT="jk jk">
 	<META NAME="CHANGEDBY" CONTENT="jk jk">
 	<STYLE TYPE="text/css">
@@ -32,7 +33,6 @@
 		P.code-cjk { background: #dddddd; so-language: zxx; text-align: left }
 		P.code-ctl { background: #dddddd; so-language: zxx; text-align: left }
 		A:link { so-language: zxx }
-		CODE.cjk { font-family: "NSimSun", monospace }
 	-->
 	</STYLE>
 </HEAD>
@@ -41,19 +41,23 @@
 <P LANG="zxx" CLASS="western" ALIGN=CENTER><BR><BR>
 </P>
 <DIV ID="Inhaltsverzeichnis1" DIR="LTR">
-	<DIV ID="Inhaltsverzeichnis1_Head" DIR="LTR">
-		<P STYLE="margin-top: 0.42cm; margin-bottom: 0.5cm; page-break-after: avoid">
-		<FONT FACE="Albany, sans-serif"><FONT SIZE=4 STYLE="font-size: 16pt"><B>Inhaltsverzeichnis</B></FONT></FONT></P>
+	<P LANG="zxx" CLASS="western"><BR><BR>
+	</P>
+	<DIV ID="Inhaltsverzeichnis1" DIR="LTR" STYLE="background: transparent">
+		<DIV ID="Inhaltsverzeichnis1_Head" DIR="LTR">
+			<P STYLE="margin-top: 0.42cm; margin-bottom: 0.5cm; page-break-after: avoid">
+			<FONT FACE="Albany, sans-serif"><FONT SIZE=4 STYLE="font-size: 16pt"><B>Inhaltsverzeichnis</B></FONT></FONT></P>
+		</DIV>
 	</DIV>
-	<P STYLE="margin-bottom: 0cm"><FONT FACE="Arial, sans-serif">1.Projekt
-	anlegen	1</FONT></P>
-	<P STYLE="margin-bottom: 0cm"><FONT FACE="Arial, sans-serif">2.GameView
-	erstellen	2</FONT></P>
+	<P LANG="zxx" CLASS="western"><BR><BR>
+	</P>
+	<P LANG="zxx" CLASS="western"><BR><BR>
+	</P>
 </DIV>
-<P CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+<P LANG="zxx" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
 </P>
 <OL>
-	<LI><H1 LANG="zxx" CLASS="western"><SPAN LANG="zxx">Projekt anlegen</SPAN></H1>
+	<LI><H1 LANG="zxx" CLASS="western">Projekt anlegen</H1>
 </OL>
 <P LANG="zxx" CLASS="western"><BR><BR>
 </P>
@@ -205,11 +209,12 @@ drizzle &ndash; SQLite &amp; better-SQLite</P>
 <OL START=3>
 	<LI><H1 LANG="zxx" CLASS="western">ServerSentEvent</H1>
 </OL>
-<P LANG="zxx" CLASS="western">Siehe <A HREF="https://github.com/razshare/sveltekit-sse/tree/main">razshare/sveltekit-sse:
-Server Sent Events with SvelteKit</A> 
+<P LANG="zxx" CLASS="western"><SPAN LANG="zxx">Siehe
+<A HREF="https://github.com/razshare/sveltekit-sse/tree/main">razshare/sveltekit-sse:
+Server Sent Events with SvelteKit</A> </SPAN>
 </P>
 <UL>
-	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Arial, sans-serif">npm
+	<LI><P LANG="zxx" CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Arial, sans-serif">npm
 	i -D sveltekit-sse</FONT></P>
 </UL>
 <P LANG="zxx" CLASS="western"><BR><BR>
@@ -221,34 +226,43 @@ Server Sent Events with SvelteKit</A>
 	<P LANG="zxx" CLASS="code-western">return produce(async function
 	start({ emit }) {</P>
 </UL>
-<P LANG="zxx" CLASS="code-western">&nbsp; &nbsp; &nbsp; &nbsp; const
-{error} = emit('message', `the time is ${Date.now()}`)</P>
-<P LANG="zxx" CLASS="code-western">  }}</P>
+<P LANG="zxx" CLASS="code-western">&nbsp; &nbsp; &nbsp; &nbsp; <SPAN LANG="zxx">const
+{error} = emit('message', `the time is ${Date.now()}`)</SPAN></P>
+<P LANG="zxx" CLASS="code-western">}}</P>
 <UL>
-	<P LANG="zxx" CLASS="western"></P>
 	<LI><P LANG="zxx" CLASS="western">In page.svelte:</P>
 </UL>
-<P CLASS="western" STYLE="margin-bottom: 0cm; font-weight: normal; line-height: 0.5cm">
-<FONT COLOR="#6a9955"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN STYLE="background: #1e1e1e">&lt;script&gt;</SPAN></FONT></FONT></FONT></P>
-<P CLASS="western" STYLE="margin-bottom: 0cm; font-weight: normal; line-height: 0.5cm">
-<FONT COLOR="#6a9955"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN STYLE="background: #1e1e1e">import
+<P LANG="zxx" CLASS="western" STYLE="margin-bottom: 0cm; font-weight: normal; line-height: 0.5cm">
+<FONT COLOR="#6a9955"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2><SPAN STYLE="background: #1e1e1e">&lt;script&gt;</SPAN></FONT></FONT></FONT></P>
+<P LANG="zxx" CLASS="western" STYLE="margin-bottom: 0cm; font-weight: normal; line-height: 0.5cm">
+<FONT COLOR="#6a9955"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2><SPAN STYLE="background: #1e1e1e">import
 { source } from 'sveltekit-sse'</SPAN></FONT></FONT></FONT></P>
-<P CLASS="western" STYLE="margin-bottom: 0cm; line-height: 0.5cm"><FONT COLOR="#d4d4d4"><SPAN STYLE="background: #1e1e1e">&nbsp;<FONT FACE="Arial, sans-serif"><FONT COLOR="#6a9955"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN STYLE="font-weight: normal">const
+<P LANG="zxx" CLASS="western" STYLE="margin-bottom: 0cm; line-height: 0.5cm">
+<FONT COLOR="#d4d4d4"><SPAN STYLE="background: #1e1e1e">&nbsp;<FONT COLOR="#6a9955"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2><SPAN STYLE="font-weight: normal">const
 value = source('/custom-event').select('message') &nbsp; &nbsp; &nbsp;
-&nbsp; &nbsp;</SPAN></FONT></FONT></FONT></SPAN></FONT></FONT></P>
-<P CLASS="western" STYLE="margin-bottom: 0cm; line-height: 0.5cm"><FONT COLOR="#d4d4d4"><FONT FACE="Arial, sans-serif"><SPAN STYLE="background: #1e1e1e"><FONT COLOR="#6a9955"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN STYLE="font-weight: normal">&lt;/script&gt;</SPAN></FONT></FONT></FONT></SPAN></FONT></FONT></P>
-<P CLASS="western" STYLE="margin-bottom: 0cm; line-height: 0.5cm"><FONT COLOR="#d4d4d4"><FONT FACE="Arial, sans-serif"><SPAN STYLE="background: #1e1e1e"><FONT COLOR="#6a9955"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN STYLE="font-weight: normal">&lt;div&gt;{$value}&lt;/div&gt;</SPAN></FONT></FONT></FONT></SPAN></FONT></FONT></P>
+&nbsp; &nbsp;</SPAN></FONT></FONT></FONT></SPAN></FONT></P>
+<P LANG="zxx" CLASS="western" STYLE="margin-bottom: 0cm; font-weight: normal; line-height: 0.5cm">
+<FONT COLOR="#6a9955"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2><SPAN STYLE="background: #1e1e1e">&lt;/script&gt;</SPAN></FONT></FONT></FONT></P>
+<P LANG="zxx" CLASS="western" STYLE="margin-bottom: 0cm; font-weight: normal; line-height: 0.5cm">
+<FONT COLOR="#6a9955"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2><SPAN STYLE="background: #1e1e1e">&lt;div&gt;{$value}&lt;/div&gt;</SPAN></FONT></FONT></FONT></P>
 <P LANG="zxx" CLASS="western"><BR><BR>
 </P>
 <OL START=4>
 	<LI><H1 LANG="zxx" CLASS="western">Websocket</H1>
 </OL>
-<P LANG="zxx" CLASS="western">Siehe
-<A HREF="https://github.com/suhaildawood/SvelteKit-integrated-WebSocket/tree/main">suhaildawood/SvelteKit-integrated-WebSocket:
+<P LANG="zxx" CLASS="western"><SPAN LANG="zxx">Siehe</SPAN></P>
+<P LANG="zxx" CLASS="western">
+<SPAN LANG="zxx"><A HREF="https://github.com/suhaildawood/SvelteKit-integrated-WebSocket/tree/main">suhaildawood/SvelteKit-integrated-WebSocket:
 First-class support for WebSockets within SvelteKit by attaching a
-WebSocket server to the global state.</A> 
+WebSocket server to the global state.</A> </SPAN>
 </P>
-<P LANG="zxx" CLASS="western"><BR><BR>
+<P LANG="zxx" CLASS="western"><A HREF="https://github.com/aolose/vite-sveltekit-node-ws/blob/main/README.md">vite-sveltekit-node-ws/README.md
+at main &middot; aolose/vite-sveltekit-node-ws</A> 
+</P>
+<P LANG="zxx" CLASS="western"><A HREF="https://github.com/Maiz27/stale-mates?tab=readme-ov-file">Maiz27/stale-mates:
+A full-stack chess platform using SvelteKit, WebSockets, and the
+Stockfish engine, featuring adjustable AI difficulty, and real-time
+multiplayer.</A> 
 </P>
 <UL>
 	<LI><P LANG="zxx" CLASS="western">Da unser Projekt als javascript
@@ -256,7 +270,7 @@ WebSocket server to the global state.</A>
 	angepasst werden:</P>
 </UL>
 <UL>
-	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Arial, sans-serif">entferne
+	<LI><P LANG="zxx" CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Arial, sans-serif">entferne
 	aus scripten import type...</FONT></P>
 	<LI><P LANG="zxx" CLASS="western">Variablen-Typangaben und ...as xxx</P>
 </UL>
@@ -276,25 +290,31 @@ WebSocket server to the global state.</A>
 <UL>
 	<UL>
 		<LI><P LANG="zxx" CLASS="western">in devDependencies hinzuf&uuml;gen
-		 <FONT COLOR="#9cdcfe"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN STYLE="font-weight: normal"><SPAN STYLE="background: #1e1e1e">&quot;@types/ws&quot;</SPAN></SPAN></FONT></FONT></FONT><FONT COLOR="#d4d4d4"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN STYLE="font-weight: normal"><SPAN STYLE="background: #1e1e1e">:
-		</SPAN></SPAN></FONT></FONT></FONT><FONT COLOR="#ce9178"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN STYLE="font-weight: normal"><SPAN STYLE="background: #1e1e1e">&quot;^8.5.5&quot;</SPAN></SPAN></FONT></FONT></FONT><FONT COLOR="#d4d4d4"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN STYLE="font-weight: normal"><SPAN STYLE="background: #1e1e1e">,</SPAN></SPAN></FONT></FONT></FONT></P>
+		<FONT COLOR="#9cdcfe"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2><SPAN STYLE="font-weight: normal"><SPAN STYLE="background: #1e1e1e">&quot;@types/ws&quot;</SPAN></SPAN></FONT></FONT></FONT><FONT COLOR="#d4d4d4"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2><SPAN STYLE="font-weight: normal"><SPAN STYLE="background: #1e1e1e">:
+		</SPAN></SPAN></FONT></FONT></FONT><FONT COLOR="#ce9178"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2><SPAN STYLE="font-weight: normal"><SPAN STYLE="background: #1e1e1e">&quot;^8.5.5&quot;</SPAN></SPAN></FONT></FONT></FONT><FONT COLOR="#d4d4d4"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2><SPAN STYLE="font-weight: normal"><SPAN STYLE="background: #1e1e1e">,</SPAN></SPAN></FONT></FONT></FONT></P>
 		<LI><P LANG="zxx" CLASS="western">ins scripts hinzuf&uuml;gen (das
 		ist der Server wenn ein Produktionsbuild gemacht wird):
-		<FONT COLOR="#9cdcfe"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN STYLE="font-weight: normal"><SPAN STYLE="background: #1e1e1e">&quot;prodServer&quot;</SPAN></SPAN></FONT></FONT></FONT><FONT COLOR="#d4d4d4"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN STYLE="font-weight: normal"><SPAN STYLE="background: #1e1e1e">:
-		</SPAN></SPAN></FONT></FONT></FONT><FONT COLOR="#ce9178"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN STYLE="font-weight: normal"><SPAN STYLE="background: #1e1e1e">&quot;PORT=3005
+		<FONT COLOR="#9cdcfe"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2><SPAN STYLE="font-weight: normal"><SPAN STYLE="background: #1e1e1e">&quot;prodServer&quot;</SPAN></SPAN></FONT></FONT></FONT><FONT COLOR="#d4d4d4"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2><SPAN STYLE="font-weight: normal"><SPAN STYLE="background: #1e1e1e">:
+		</SPAN></SPAN></FONT></FONT></FONT><FONT COLOR="#ce9178"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2><SPAN STYLE="font-weight: normal"><SPAN STYLE="background: #1e1e1e">&quot;PORT=3005
 		tsm ./prodServer.ts&quot;</SPAN></SPAN></FONT></FONT></FONT></P>
 	</UL>
 </UL>
 <UL>
-	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Arial, sans-serif">ge&auml;nderte
+	<LI><P LANG="zxx" CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Arial, sans-serif">ge&auml;nderte
 	Abh&auml;ngigkeiten installieren mit npm install</FONT></P>
-	<P CLASS="western" STYLE="margin-bottom: 0cm"></P>
 	<LI><P LANG="zxx" CLASS="western">prodServer.js anlegen (direkt im
 	Hauptverzeichnis)</P>
 </UL>
-<P CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+<P LANG="zxx" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
 </P>
-<P CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+<OL START=4>
+	<LI><H1 LANG="zxx" CLASS="western" STYLE="page-break-after: avoid">Andere</H1>
+</OL>
+<P LANG="zxx" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
 </P>
+<P LANG="zxx" CLASS="western" STYLE="margin-bottom: 0cm"><A HREF="https://playwright.dev/">Fast
+and reliable end-to-end testing for modern web apps | Playwright</A> 
+</P>
+<P LANG="zxx" CLASS="western" STYLE="margin-bottom: 0cm">https://boardgame.io/</P>
 </BODY>
 </HTML>

@@ -2,6 +2,8 @@ import * as auth from '$lib/server/auth.js';
 import { building } from '$app/environment';
 import { GlobalThisWSS } from '$lib/server/webSocketUtils';
 import { userJoin,userLeave } from '$lib/server/users';
+import { log } from '$lib/server/utils';
+import { nanoid } from 'nanoid';
 
 // This can be extracted into a separate file
 let wssInitialized = false;
@@ -46,6 +48,31 @@ export const handle = (async ({ event, resolve }) => {
   return response;
 });// satisfies Handle;
 
+export const handleError/*: HandleServerError*/ = async ({ event, error, message, status }) => {
+  const errorId = nanoid();
+  const isNotFound = status === 404;
+
+  if (isNotFound) {
+      log.error(`Unhandled not found error (${errorId}):\n`, error);
+  }
+  else {
+      log.fatal(`Uncaught error (${errorId}):\n`, error);
+      //if (!dev) {
+          log.fatal(`Associated request (${errorId}):\n`, event.request);
+      //}
+  }
+
+  /*const errorMessage = status === 500 ?
+      `Error interno del servidor. Id: ${errorId}` :
+      isNotFound ?
+          `No se encontro el recurso solicitado. Id: ${errorId}` :
+          message;
+*/
+  return {
+      id: errorId,
+      message: errorMessage,
+  };
+};
 /* TODO
 const handleAuth = async ({ event, resolve }) => {
 	const sessionToken = event.cookies.get(auth.sessionCookieName);
