@@ -11,7 +11,7 @@ export function load({ fetch,params,setHeaders,cookies,url }) {
     return({todos:[]});
 }
 
-export const actions = {
+/*export const actions = {
 	create: async ({ cookies, request,url }) => {
 		const data = await request.formData();
         const userid = cookies.get('userid');
@@ -22,4 +22,4 @@ export const actions = {
         redirect(302, "/tictactoe");
 		return { success: true,redirect:"tictactoe" };
 	}
-};
+};*/

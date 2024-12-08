@@ -1,82 +1,48 @@
-import { eq } from 'drizzle-orm';
-import { sha256 } from '@oslojs/crypto/sha2';
-import { encodeBase64url, encodeHexLowerCase } from '@oslojs/encoding';
-import { db } from '$lib/server/db';
-import * as table from '$lib/server/db/schema';
+import { db,deleteSession,findSession } from "./db.js";
+import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from "@oslojs/encoding";
+import { sha256 } from "@oslojs/crypto/sha2";
+import {sessionCookieName} from '$lib/shared/constants';
 
-const DAY_IN_MS = 1000 * 60 * 60 * 24;
-
-export const sessionCookieName = 'auth-session';
-
-export function generateSessionToken() {
-	const bytes = crypto.getRandomValues(new Uint8Array(18));
-	const token = encodeBase64url(bytes);
+export function generateSessionToken()/*: string */{
+	const bytes = new Uint8Array(20);
+	crypto.getRandomValues(bytes);
+	const token = encodeBase32LowerCaseNoPadding(bytes);
 	return token;
 }
 
-/**
- * @param {string} token
- * @param {string} userId
- */
-export async function createSession(token, userId) {
+export function createSession(token/*: string*/, userId/*: number*/)/*: Session*/ {
 	const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)));
-	const session = {
+	const session/*: Session*/ = {
 		id: sessionId,
 		userId,
-		expiresAt: new Date(Date.now() + DAY_IN_MS * 30)
+		expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30)
 	};
-	await db.insert(table.session).values(session);
+	const stmt = db.prepare("INSERT INTO session (id, user_id, expires_at) VALUES (?, ?, ?)");
+    let info = stmt.run(session.id,
+		session.userId,
+		Math.floor(session.expiresAt.getTime() / 1000));
 	return session;
 }
 
-/** @param {string} token */
-export async function validateSessionToken(token) {
-	const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)));
-	const [result] = await db
-		.select({
-			// Adjust user table here to tweak returned data
-			user: { id: table.user.id, username: table.user.username },
-			session: table.session
-		})
-		.from(table.session)
-		.innerJoin(table.user, eq(table.session.userId, table.user.id))
-		.where(eq(table.session.id, sessionId));
-
-	if (!result) {
-		return { session: null, user: null };
-	}
-	const { session, user } = result;
-
-	const sessionExpired = Date.now() >= session.expiresAt.getTime();
-	if (sessionExpired) {
-		await db.delete(table.session).where(eq(table.session.id, session.id));
-		return { session: null, user: null };
-	}
-
-	const renewSession = Date.now() >= session.expiresAt.getTime() - DAY_IN_MS * 15;
-	if (renewSession) {
-		session.expiresAt = new Date(Date.now() + DAY_IN_MS * 30);
-		await db
-			.update(table.session)
-			.set({ expiresAt: session.expiresAt })
-			.where(eq(table.session.id, session.id));
-	}
-
-	return { session, user };
+export function createBlankSessionCookie(){
+	const session/*: Session*/ = {
+		id: 0,
+		userId:"anonymous",
+		expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30)
+	};
+	return session;
 }
-
-/** @param {string} sessionId */
-export async function invalidateSession(sessionId) {
-	await db.delete(table.session).where(eq(table.session.id, sessionId));
-}
-
 /**
  * @param {import("@sveltejs/kit").RequestEvent} event
  * @param {string} token
  * @param {Date} expiresAt
  */
-export function setSessionTokenCookie(event, token, expiresAt) {
+ export function setSessionTokenCookie(event, token, expiresAt) {
 	event.cookies.set(sessionCookieName, token, {
+		expires: expiresAt,
+		path: '/'
+	});
+	event.cookies.set("myCookie", token, {
 		expires: expiresAt,
 		path: '/'
 	});
@@ -88,3 +54,71 @@ export function deleteSessionTokenCookie(event) {
 		path: '/'
 	});
 }
+export function validateSessionToken(token/*: string*/)/*: SessionValidationResult */{
+	const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)));
+	const row = findSession(sessionId);
+	if (row === null || row === undefined) {
+		return { session: null, user: null };
+	}
+	const session/*: Session*/ = {
+		id: row.id,
+		userId: row.user_id,
+		expiresAt: new Date(row.expires_at * 1000)
+	};
+	const user/*: User */= {
+		id: row.user_id
+	};
+	if (Date.now() >= session.expiresAt.getTime()) {
+		deleteSession(session.id)
+		return { session: null, user: null };
+	}
+	if (Date.now() >= session.expiresAt.getTime() - 1000 * 60 * 60 * 24 * 15) {
+		session.expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30);
+		const stmt = db.prepare("UPDATE session SET expires_at = ? WHERE id = ?");
+    	let info = stmt.run(Math.floor(session.expiresAt.getTime() / 1000),
+			session.id	);
+	}
+	return { session, user };
+}
+
+export function invalidateSession(sessionId/*: string*/)/*: void*/ {
+	deleteSession(sessionId);
+}
+
+// export type SessionValidationResult =
+// 	| { session: Session; user: User }
+// 	| { session: null; user: null };
+
+// export interface Session {
+// 	id: string;
+// 	userId: number;
+// 	expiresAt: Date;
+// }
+
+// export interface User {
+// 	id: number;
+// }
+
+// ....................................................
+// import { Lucia } from "lucia";
+// import { BetterSqlite3Adapter } from "@lucia-auth/adapter-sqlite";
+// import { dev } from "$app/environment";
+// import { db } from "./db";
+
+// const adapter = new BetterSqlite3Adapter(db, {
+// 	user: "user",
+// 	session: "session"
+// });
+
+// export const lucia = new Lucia(adapter, {
+// 	sessionCookie: {
+// 		attributes: {
+// 			secure: !dev
+// 		}
+// 	},
+// 	getUserAttributes: (attributes) => {
+// 		return {
+// 			username: attributes.username
+// 		};
+// 	}
+// });

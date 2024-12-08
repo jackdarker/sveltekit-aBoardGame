@@ -1,9 +1,10 @@
-import * as auth from '$lib/server/auth.js';
+import {generateSessionToken,createSession,validateSessionToken,invalidateSession,createBlankSessionCookie} from '$lib/server/auth.js';
 import { building } from '$app/environment';
 import { GlobalThisWSS } from '$lib/server/webSocketUtils';
 import { userJoin,userLeave } from '$lib/server/users';
 import { log } from '$lib/server/utils';
 import { nanoid } from 'nanoid';
+import {sessionCookieName} from '$lib/shared/constants';
 
 // This can be extracted into a separate file
 let wssInitialized = false;
@@ -42,6 +43,29 @@ export const handle = (async ({ event, resolve }) => {
       event.locals.wss = wss;
     }
   }
+  const sessionId = event.cookies.get(sessionCookieName);
+	if (!sessionId) {
+		event.locals.user = null;
+		event.locals.session = null;
+	} else {
+    const { session, user } = await validateSessionToken(sessionId);
+    // if (session && session.fresh) {
+    //   const sessionCookie = lucia.createSessionCookie(session.id);
+    //   event.cookies.set(sessionCookieName, sessionCookie.value, {
+    //     path: ".",
+    //     ...sessionCookie.attributes
+    //   });
+    // }
+    /*if (!session) {
+      const sessionCookie = createBlankSessionCookie();
+      event.cookies.set(sessionCookieName, sessionCookie.value, {
+        path: ".",
+        ...sessionCookie.attributes
+      });*/
+    //}
+    event.locals.user = user;
+    event.locals.session = session;
+  }
   const response = await resolve(event, {
 		filterSerializedResponseHeaders: name => name === 'content-type',
 	});
@@ -70,7 +94,7 @@ export const handleError/*: HandleServerError*/ = async ({ event, error, message
 */
   return {
       id: errorId,
-      message: errorMessage,
+      message: message,
   };
 };
 /* TODO
