@@ -9,7 +9,7 @@ export const load = async (event) => {
 };
 
 export const actions = {
-	logout: async (event) => {
+	logout_2: async (event) => {
 		if (!event.locals.session) {
 			return fail(401);
 		}

@@ -3,7 +3,17 @@
 	import '../app.css';
 
 	/** @type {{children: import('svelte').Snippet}} */
-	let { children } = $props();
+	let { data,children } = $props();
+	import { setContext } from 'svelte';
+	import { writable } from 'svelte/store';
+		// Create a store and update it when necessary...
+	const user = writable(data.user);
+	$effect.pre(() => {
+		user.set(data.user);
+	});
+
+	// ...and add it to the context for child components to access
+	setContext('user', user);
 </script>
 
 <div class="app">

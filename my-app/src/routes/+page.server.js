@@ -1,14 +1,14 @@
 import {redirect} from '@sveltejs/kit';
 import * as db from '$lib/tictactoe';
 
-export function load({ fetch,params,setHeaders,cookies,url }) {
-	const id = cookies.get('userid');
+export const load = async (event) => {//function load({ fetch,params,setHeaders,cookies,url }) {
+	const id = event.cookies.get('userid');
 	if (!id) {
-		cookies.set('userid', crypto.randomUUID(), { path: '/' });
+		event.cookies.set('userid', crypto.randomUUID(), { path: '/' });
 	}
 	//let search = url.searchParams;
 	//let item= decodeURIComponent(search.get('item')||"");
-    return({todos:[]});
+    return { user: event.locals.user };
 }
 
 /*export const actions = {

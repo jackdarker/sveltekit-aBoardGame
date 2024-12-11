@@ -6,11 +6,12 @@
 	<META NAME="GENERATOR" CONTENT="OpenOffice 4.1.15  (Win32)">
 	<META NAME="CREATED" CONTENT="20090416;11320264">
 	<META NAME="CHANGEDBY" CONTENT="jk jk">
-	<META NAME="CHANGED" CONTENT="20241201;17344351">
+	<META NAME="CHANGED" CONTENT="20241209;11562897">
 	<META NAME="Info 1" CONTENT="">
 	<META NAME="Info 2" CONTENT="">
 	<META NAME="Info 3" CONTENT="">
 	<META NAME="Info 4" CONTENT="">
+	<META NAME="CHANGEDBY" CONTENT="jk jk">
 	<META NAME="CHANGEDBY" CONTENT="jk jk">
 	<META NAME="CHANGEDBY" CONTENT="jk jk">
 	<META NAME="CHANGEDBY" CONTENT="jk jk">
@@ -48,6 +49,17 @@
 			<P STYLE="margin-top: 0.42cm; margin-bottom: 0.5cm; page-break-after: avoid">
 			<FONT FACE="Albany, sans-serif"><FONT SIZE=4 STYLE="font-size: 16pt"><B>Inhaltsverzeichnis</B></FONT></FONT></P>
 		</DIV>
+		<P STYLE="margin-bottom: 0cm"> <FONT FACE="Arial, sans-serif">1
+		Projekt anlegen	1</FONT></P>
+		<P STYLE="margin-bottom: 0cm"> <FONT FACE="Arial, sans-serif">2
+		GameView erstellen	2</FONT></P>
+		<P STYLE="margin-bottom: 0cm"> <FONT FACE="Arial, sans-serif">3
+		Push-Nachrichten	2</FONT></P>
+		<P STYLE="margin-left: 1cm; margin-bottom: 0cm"> <FONT FACE="Times New Roman, serif">3.1.1
+		ServerSentEvent	2</FONT></P>
+		<P STYLE="margin-left: 1cm; margin-bottom: 0cm"> <FONT FACE="Times New Roman, serif">1.1.1
+		Websocket	3</FONT></P>
+		<P STYLE="margin-left: 0.5cm; margin-bottom: 0cm"> <FONT FACE="Times New Roman, serif">Andere	3</FONT></P>
 	</DIV>
 	<P LANG="zxx" CLASS="western"><BR><BR>
 	</P>
@@ -56,9 +68,7 @@
 </DIV>
 <P LANG="zxx" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
 </P>
-<OL>
-	<LI><H1 LANG="zxx" CLASS="western">Projekt anlegen</H1>
-</OL>
+<H1 LANG="zxx" CLASS="western"> 1 <SPAN LANG="zxx">Projekt anlegen</SPAN></H1>
 <P LANG="zxx" CLASS="western"><BR><BR>
 </P>
 <UL>
@@ -129,20 +139,19 @@ drizzle &ndash; SQLite &amp; better-SQLite</P>
 </UL>
 <P LANG="zxx" CLASS="western"><BR><BR>
 </P>
-<UL>
+<OL>
 	<LI><P LANG="zxx" CLASS="western">dann</P>
 	<P LANG="zxx" CLASS="code-western" STYLE="font-style: normal; font-weight: normal">
 	<FONT COLOR="#000000"><FONT FACE="Arial, sans-serif"><FONT SIZE=2 STYLE="font-size: 11pt">npm
 	run dev -- --open</FONT></FONT></FONT></P>
 	<P LANG="zxx" CLASS="western"><SPAN LANG="zxx">und browse zu
 	<A HREF="http://localhost:5173/">http://localhost:5173</A></SPAN></P>
-</UL>
-<P LANG="zxx" CLASS="western"><BR><BR>
-</P>
+</OL>
 <P LANG="zxx" CLASS="western"><BR><BR>
 </P>
 <OL START=2>
-	<LI><H1 LANG="zxx" CLASS="western">GameView erstellen</H1>
+	<LI><H1 LANG="zxx" CLASS="western"><SPAN LANG="zxx">GameView
+	erstellen</SPAN></H1>
 </OL>
 <P LANG="zxx" CLASS="western"><BR><BR>
 </P>
@@ -204,10 +213,11 @@ drizzle &ndash; SQLite &amp; better-SQLite</P>
 </P>
 <P LANG="zxx" CLASS="western"><BR><BR>
 </P>
-<P LANG="zxx" CLASS="western"><BR><BR>
-</P>
 <OL START=3>
-	<LI><H1 LANG="zxx" CLASS="western">ServerSentEvent</H1>
+	<LI><H1 LANG="zxx" CLASS="western">Push-Nachrichten</H1>
+	<OL>
+		<LI><H1 LANG="zxx" CLASS="western"><FONT FACE="Arial, sans-serif"><FONT SIZE=4><SPAN LANG="zxx"><SPAN STYLE="font-style: normal"><SPAN STYLE="text-decoration: none"><B>ServerSentEvent</B></SPAN></SPAN></SPAN></FONT></FONT></H1>
+	</OL>
 </OL>
 <P LANG="zxx" CLASS="western"><SPAN LANG="zxx">Siehe
 <A HREF="https://github.com/razshare/sveltekit-sse/tree/main">razshare/sveltekit-sse:
@@ -228,46 +238,52 @@ Server Sent Events with SvelteKit</A> </SPAN>
 </UL>
 <P LANG="zxx" CLASS="code-western">&nbsp; &nbsp; &nbsp; &nbsp; <SPAN LANG="zxx">const
 {error} = emit('message', `the time is ${Date.now()}`)</SPAN></P>
-<P LANG="zxx" CLASS="code-western">}}</P>
 <UL>
-	<LI><P LANG="zxx" CLASS="western">In page.svelte:</P>
+	<LI><P LANG="zxx" CLASS="code-western"><SPAN LANG="zxx">}}</SPAN></P>
 </UL>
+<OL>
+	<LI><P LANG="zxx" CLASS="western">In page.svelte:</P>
+</OL>
 <P LANG="zxx" CLASS="western" STYLE="margin-bottom: 0cm; font-weight: normal; line-height: 0.5cm">
 <FONT COLOR="#6a9955"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2><SPAN STYLE="background: #1e1e1e">&lt;script&gt;</SPAN></FONT></FONT></FONT></P>
 <P LANG="zxx" CLASS="western" STYLE="margin-bottom: 0cm; font-weight: normal; line-height: 0.5cm">
 <FONT COLOR="#6a9955"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2><SPAN STYLE="background: #1e1e1e">import
 { source } from 'sveltekit-sse'</SPAN></FONT></FONT></FONT></P>
 <P LANG="zxx" CLASS="western" STYLE="margin-bottom: 0cm; line-height: 0.5cm">
-<FONT COLOR="#d4d4d4"><SPAN STYLE="background: #1e1e1e">&nbsp;<FONT COLOR="#6a9955"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2><SPAN STYLE="font-weight: normal">const
+<FONT COLOR="#d4d4d4"><SPAN STYLE="background: #1e1e1e">&nbsp;<FONT COLOR="#6a9955"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2><SPAN LANG="zxx"><SPAN STYLE="font-weight: normal">const
 value = source('/custom-event').select('message') &nbsp; &nbsp; &nbsp;
-&nbsp; &nbsp;</SPAN></FONT></FONT></FONT></SPAN></FONT></P>
+&nbsp; &nbsp;</SPAN></SPAN></FONT></FONT></FONT></SPAN></FONT></P>
 <P LANG="zxx" CLASS="western" STYLE="margin-bottom: 0cm; font-weight: normal; line-height: 0.5cm">
 <FONT COLOR="#6a9955"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2><SPAN STYLE="background: #1e1e1e">&lt;/script&gt;</SPAN></FONT></FONT></FONT></P>
 <P LANG="zxx" CLASS="western" STYLE="margin-bottom: 0cm; font-weight: normal; line-height: 0.5cm">
 <FONT COLOR="#6a9955"><FONT FACE="Consolas, Courier New, monospace"><FONT SIZE=2><SPAN STYLE="background: #1e1e1e">&lt;div&gt;{$value}&lt;/div&gt;</SPAN></FONT></FONT></FONT></P>
 <P LANG="zxx" CLASS="western"><BR><BR>
 </P>
-<OL START=4>
-	<LI><H1 LANG="zxx" CLASS="western">Websocket</H1>
+<OL>
+	<OL START=2>
+		<LI><H1 LANG="zxx" CLASS="western" STYLE="font-style: normal; text-decoration: none; page-break-after: avoid">
+		<FONT SIZE=4>Websocket</FONT></H1>
+	</OL>
 </OL>
-<P LANG="zxx" CLASS="western"><SPAN LANG="zxx">Siehe</SPAN></P>
-<P LANG="zxx" CLASS="western">
-<SPAN LANG="zxx"><A HREF="https://github.com/suhaildawood/SvelteKit-integrated-WebSocket/tree/main">suhaildawood/SvelteKit-integrated-WebSocket:
+<P LANG="zxx" CLASS="western"><BR><BR>
+</P>
+<P LANG="zxx" CLASS="western">Siehe</P>
+<P LANG="zxx" CLASS="western"><SPAN LANG="zxx"><A HREF="https://github.com/suhaildawood/SvelteKit-integrated-WebSocket/tree/main">suhaildawood/SvelteKit-integrated-WebSocket:
 First-class support for WebSockets within SvelteKit by attaching a
 WebSocket server to the global state.</A> </SPAN>
 </P>
-<P LANG="zxx" CLASS="western"><A HREF="https://github.com/aolose/vite-sveltekit-node-ws/blob/main/README.md">vite-sveltekit-node-ws/README.md
-at main &middot; aolose/vite-sveltekit-node-ws</A> 
+<P LANG="zxx" CLASS="western"><SPAN LANG="zxx"><A HREF="https://github.com/aolose/vite-sveltekit-node-ws/blob/main/README.md">vite-sveltekit-node-ws/README.md
+at main &middot; aolose/vite-sveltekit-node-ws</A> </SPAN>
 </P>
-<P LANG="zxx" CLASS="western"><A HREF="https://github.com/Maiz27/stale-mates?tab=readme-ov-file">Maiz27/stale-mates:
+<P LANG="zxx" CLASS="western"><SPAN LANG="zxx"><A HREF="https://github.com/Maiz27/stale-mates?tab=readme-ov-file">Maiz27/stale-mates:
 A full-stack chess platform using SvelteKit, WebSockets, and the
 Stockfish engine, featuring adjustable AI difficulty, and real-time
-multiplayer.</A> 
+multiplayer.</A> </SPAN>
 </P>
 <UL>
-	<LI><P LANG="zxx" CLASS="western">Da unser Projekt als javascript
-	angelegt wurde, m&uuml;ssen Datei-Endung und manche Stellen
-	angepasst werden:</P>
+	<LI><P LANG="zxx" CLASS="western"><SPAN LANG="zxx">Da unser Projekt
+	als javascript angelegt wurde, m&uuml;ssen Datei-Endung und manche
+	Stellen angepasst werden:</SPAN></P>
 </UL>
 <UL>
 	<LI><P LANG="zxx" CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Arial, sans-serif">entferne
@@ -307,14 +323,32 @@ multiplayer.</A>
 </UL>
 <P LANG="zxx" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
 </P>
-<OL START=4>
-	<LI><H1 LANG="zxx" CLASS="western" STYLE="page-break-after: avoid">Andere</H1>
+<OL>
+	<OL START=3>
+		<LI><H1 LANG="zxx" CLASS="western" STYLE="font-style: normal; text-decoration: none; page-break-after: avoid">
+		<FONT SIZE=4>Andere</FONT></H1>
+	</OL>
 </OL>
 <P LANG="zxx" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
 </P>
-<P LANG="zxx" CLASS="western" STYLE="margin-bottom: 0cm"><A HREF="https://playwright.dev/">Fast
-and reliable end-to-end testing for modern web apps | Playwright</A> 
+<UL>
+	<LI><P LANG="zxx" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="zxx"><A HREF="https://playwright.dev/">Fast
+	and reliable end-to-end testing for modern web apps | Playwright</A>
+	</SPAN>
+	</P>
+</UL>
+<P LANG="zxx" CLASS="western" STYLE="margin-bottom: 0cm"><A HREF="https://boardgame.io/">https://boardgame.io/</A></P>
+<P LANG="zxx" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
 </P>
-<P LANG="zxx" CLASS="western" STYLE="margin-bottom: 0cm">https://boardgame.io/</P>
+<OL START=4>
+	<LI><H1 LANG="zxx" CLASS="western" STYLE="page-break-after: avoid">Authentifizierung</H1>
+	<OL>
+		<LI><H1 LANG="zxx" CLASS="western">Lucia-Vorlage</H1>
+	</OL>
+</OL>
+<P LANG="zxx" CLASS="western"><BR><BR>
+</P>
+<P LANG="zxx" CLASS="western"><BR><BR>
+</P>
 </BODY>
 </HTML>

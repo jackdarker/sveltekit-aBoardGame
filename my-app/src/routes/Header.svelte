@@ -2,13 +2,16 @@
 	import { page } from '$app/stores';
 	import logo from '$lib/images/svelte-logo.svg';
 	import github from '$lib/images/github.svg';
+	import { enhance } from '$app/forms';
+	import { getContext } from 'svelte';
+	import UserCtrl from '$lib/components/UserCtrlWidget.svelte'
+	// Retrieve user store from context
+	const user = getContext('user');
 </script>
 
 <header>
 	<div class="corner">
-		<a href="https://svelte.dev/docs/kit">
-			<img src={logo} alt="SvelteKit" />
-		</a>
+
 	</div>
 
 	<nav>
@@ -18,6 +21,14 @@
 		<ul>
 			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
 				<a href="/">Home</a>
+			</li>
+			<li aria-current={$page.url.pathname === '/login' ? 'page' : undefined}>
+				<a href="/login">Login</a>
+			</li>
+			<li >
+				<form method="post" action="/login?/logout" use:enhance>
+				<button type="submit">Logout</button>
+				</form>
 			</li>
 			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
 				<a href="/about">About</a>

@@ -3,6 +3,16 @@ import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from "@oslojs/enco
 import { sha256 } from "@oslojs/crypto/sha2";
 import {sessionCookieName} from '$lib/shared/constants';
 
+export async function actLogout(event) {
+    if (!event.locals.session) {
+        return fail(401);
+    }
+    await invalidateSession(event.locals.session.id);
+    deleteSessionTokenCookie(event);
+    //return redirect(302, '/demo/lucia/login');
+}
+
+
 export function generateSessionToken()/*: string */{
 	const bytes = new Uint8Array(20);
 	crypto.getRandomValues(bytes);
@@ -66,7 +76,8 @@ export function validateSessionToken(token/*: string*/)/*: SessionValidationResu
 		expiresAt: new Date(row.expires_at * 1000)
 	};
 	const user/*: User */= {
-		id: row.user_id
+		id: row.user_id,
+		username: row.username
 	};
 	if (Date.now() >= session.expiresAt.getTime()) {
 		deleteSession(session.id)

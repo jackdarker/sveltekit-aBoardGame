@@ -47,11 +47,11 @@ export function deleteSession(sessionid){
 }
 export function findSession(sessionid){
     let results = [];
-    const stmt = db.prepare('SELECT session.id, session.user_id, session.expires_at FROM session INNER JOIN user ON user.id = session.user_id WHERE session.id = ?');
+    const stmt = db.prepare('SELECT session.id, session.user_id, session.expires_at, user.username FROM session INNER JOIN user ON user.id = session.user_id WHERE session.id = ?');
     const rows = stmt.all(sessionid);
     rows.forEach((row)=>{				
         //results.push(new Tag(row.ID,row.Name));   classes not compatible with devalue?
-        results.push({ id:row.id, user_id: row.user_id, expires_at:row.expires_at });
+        results.push({ id:row.id, user_id: row.user_id, expires_at:row.expires_at, username:row.username});
     });
     return(results[0]);
 }

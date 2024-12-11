@@ -12,9 +12,12 @@
 	import { goto } from '$app/navigation';
 	//import { BASE_API_URI } from '$lib/shared/constants';
 	import { session } from '$lib/store/user';
+	import { getContext } from 'svelte';
 
 	let username, password, error;
-
+	let data = $props();
+	// Retrieve user store from context
+	const user = getContext('user');
 	const currentYear = new Date().getFullYear();
 	const handleLogin = () => {
 		const headers = new Headers();
@@ -66,7 +69,7 @@
 </svelte:head>
 
 <section>
-	<h1>
+	<h1><p>My name{$user.username}</p>
 		<span class="welcome">
 			<picture>
 				<source srcset={welcome} type="image/webp" />
