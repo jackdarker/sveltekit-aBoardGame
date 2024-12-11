@@ -47,7 +47,7 @@
     let img=["O.png","_.png","X.png"];
 
     async function onclick(e){  
-        alert(e.currentTarget.id);
+        //alert(e.currentTarget.id);
 	    let formData = new FormData(document.getElementById("assignForm"));
         formData.set('id', e.currentTarget.id); //could also .append
         let idx=parseInt(e.currentTarget.id,10);
@@ -90,14 +90,7 @@
 	<meta name="description" content="tictactoe" />
 </svelte:head>
 
-<section><div>{data.tiles}{$value}</div>
-    <div>
-        <ul>
-            {#each log as event}
-              <li>{event}</li>
-            {/each}
-          </ul>
-        </div>
+<section>
 <div class="text-column">
     <table style="table-layout:fixed" width="240em">
         <colgroup>
@@ -123,6 +116,14 @@
         </tr>
     </tbody>
     </table>
+</div>
+<div>
+    <div>{data.tiles}{$value}</div>
+    <ul>
+        {#each log as event}
+          <li>{event}</li>
+        {/each}
+    </ul>
 </div>
 <Form name="assignForm" id="assignForm" method="POST" enctype="multipart/form-data" action="?/move" on:submit={(e)=>{validateForm(e)}} hidden>
     <input name="id" autocomplete="off"/>

@@ -18,8 +18,9 @@
 	let data = $props();
 	// Retrieve user store from context
 	const user = getContext('user');
+
 	const currentYear = new Date().getFullYear();
-	const handleLogin = () => {
+	const handleLogin = () => {			//TODO OBSOLETE
 		const headers = new Headers();
 		headers.append('X-CSRFToken', $session.csrf);
 		headers.append('Content-Type', 'application/json');
@@ -69,20 +70,21 @@
 </svelte:head>
 
 <section>
-	<h1><p>My name{$user.username}</p>
+	<h1>
 		<span class="welcome">
 			<picture>
 				<source srcset={welcome} type="image/webp" />
 				<img src={welcomeFallback} alt="Welcome" />
 			</picture>
 		</span>
-
-		to your new<br />SvelteKit app<br>
 	</h1>
-	<Counter />
 	<h2>
-		Setup the Game:
+		Pick a game:
 	</h2>
+	{#if $user==null}
+	<p>You need to login to be able to take part in a game !</p>
+	{:else}
+	<p>Welcome {$user?.username}</p>
 	<div class="myForm">
 		<Form  method="POST" action="?/create">
 			<label > enter playername:
@@ -90,39 +92,8 @@
 				<input type="submit" />
 			</label>
 		</Form></div>
-
-		<main class="form-signin">
-			<form on:submit|preventDefault={handleLogin} method="POST">
-				<h1 class="h3 mb-3 fw-normal text-center">Please sign in</h1>
-				{#if error}
-					<p class="text-danger text-center">{error}</p>
-				{/if}
-				<div class="form-floating">
-					<input
-						type="text"
-						class="form-control"
-						id="floatingInput"
-						placeholder="Username"
-						bind:value={username}
-					/>
-					<label for="floatingInput">Username</label>
-				</div>
-				<div class="form-floating">
-					<input
-						type="password"
-						class="form-control"
-						id="floatingPassword"
-						bind:value={password}
-						placeholder="Password"
-					/>
-					<label for="floatingPassword">Password</label>
-				</div>
 		
-				<button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-				<p class="mt-5 mb-3 text-muted text-center">&copy; {currentYear}</p>
-			</form>
-		</main>
-		
+	{/if}		
 </section>
 
 <style>

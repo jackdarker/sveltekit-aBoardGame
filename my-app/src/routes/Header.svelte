@@ -7,6 +7,25 @@
 	import UserCtrl from '$lib/components/UserCtrlWidget.svelte'
 	// Retrieve user store from context
 	const user = getContext('user');
+
+	async function formLogout(){
+		let url ="/login?/logout";
+		let formData = new FormData();
+        let res = await fetch(url,{
+            method: 'POST',
+            body: formData,
+        });
+
+        let status = await res.status
+        let response = await res.json();
+        console.log(status);
+        if (status != 200){
+            alert(response.error);
+        } else {
+			user.set(null);
+		}
+	}
+
 </script>
 
 <header>
@@ -22,20 +41,24 @@
 			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
 				<a href="/">Home</a>
 			</li>
-			<li aria-current={$page.url.pathname === '/login' ? 'page' : undefined}>
-				<a href="/login">Login</a>
-			</li>
-			<li >
-				<form method="post" action="/login?/logout" use:enhance>
-				<button type="submit">Logout</button>
-				</form>
-			</li>
 			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
 				<a href="/about">About</a>
 			</li>
 			<li aria-current={$page.url.pathname.startsWith('/sverdle') ? 'page' : undefined}>
 				<a href="/sverdle">Sverdle</a>
 			</li>
+			{#if $user==null}
+			<li aria-current={$page.url.pathname === '/login' ? 'page' : undefined}>
+				<a href="/login">Login</a>
+			</li>
+			{:else}
+			<li >
+				<a href="" on:click={(e)=>{formLogout()}}>Logout</a>	<!--TODO "are you sure?" -->
+				<!--<form method="post" action="/login?/logout" use:enhance>
+				<button type="submit">Logout</button>
+				</form>-->
+			</li>
+			{/if}
 		</ul>
 		<svg viewBox="0 0 2 3" aria-hidden="true">
 			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />

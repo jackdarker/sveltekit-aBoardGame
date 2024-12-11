@@ -7,9 +7,10 @@ export function load({ fetch,params,setHeaders,cookies,url }) {
 }
 
 export const actions = {
-	move: async ({ cookies, request,url }) => {
+	move: async ({ locals,cookies, request,url }) => {
 		const data = await request.formData();
-        const userid = cookies.get('userid');
+        //const userid = cookies.get('userid');
+        const userid=locals.user.id;
         let idx=parseInt(data.get('id'),10);
 		let res={}, params = {}; 
         try{
